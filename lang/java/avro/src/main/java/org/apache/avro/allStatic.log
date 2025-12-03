@@ -1,0 +1,863 @@
+Resolver.java:  public static Action resolve(Schema writer, Schema reader, GenericData data) {
+Resolver.java:  public static Action resolve(Schema writer, Schema reader) {
+Resolver.java:  private static Action resolve(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+Resolver.java:  public static abstract class Action {
+Resolver.java:  public static class DoNothing extends Action {
+Resolver.java:  public static class ErrorAction extends Action {
+Resolver.java:  public static class Promote extends Action {
+Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d) {
+Resolver.java:    public static boolean isValid(Schema w, Schema r) {
+Resolver.java:  public static class Container extends Action {
+Resolver.java:  public static class EnumAdjust extends Action {
+Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d) {
+Resolver.java:  public static class Skip extends Action {
+Resolver.java:  public static class RecordAdjust extends Action {
+Resolver.java:    static Action resolve(Schema writeSchema, Schema readSchema, GenericData data, Map<SeenPair, Action> seen) {
+Resolver.java:  public static class WriterUnion extends Action {
+Resolver.java:    public static Action resolve(Schema writeSchema, Schema readSchema, GenericData data, Map<SeenPair, Action> seen) {
+Resolver.java:  public static class ReaderUnion extends Action {
+Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+Resolver.java:    private static int firstMatchingBranch(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+Resolver.java:    private static boolean hasMatchError(Action action) {
+Resolver.java:  private static boolean unionEquiv(Schema write, Schema read, Map<SeenPair, Boolean> seen) {
+message/MessageDecoder.java:    private static final ThreadLocal<ReusableByteArrayInputStream> BYTE_ARRAY_IN = ThreadLocalWithInitial
+message/MessageDecoder.java:    private static final ThreadLocal<ReusableByteBufferInputStream> BYTE_BUFFER_IN = ThreadLocalWithInitial
+message/RawMessageDecoder.java:  private static final ThreadLocal<BinaryDecoder> DECODER = new ThreadLocal<>();
+message/BinaryMessageDecoder.java:  private static final ThreadLocal<byte[]> HEADER_BUFFER = ThreadLocalWithInitial.of(() -> new byte[10]);
+message/BinaryMessageDecoder.java:  private static final ThreadLocal<ByteBuffer> FP_BUFFER = ThreadLocalWithInitial.of(() -> {
+JsonSchemaFormatterFactory.java:  public static final String VARIANT_NAME_PRETTY = "pretty";
+JsonSchemaFormatterFactory.java:  public static final String VARIANT_NAME_INLINE = "inline";
+message/BinaryMessageEncoder.java:  static final byte[] V1_HEADER = new byte[] { (byte) 0xC3, (byte) 0x01 };
+message/BinaryMessageEncoder.java:  private static class V1MessageEncoder<D> extends RawMessageEncoder<D> {
+message/BinaryMessageEncoder.java:    private static byte[] getWriteHeader(Schema schema) {
+Protocol.java:  public static final long VERSION = 1;
+Protocol.java:  private static final Set<String> MESSAGE_RESERVED = Set.of("doc", "response", "request", "errors", "one-way");
+Protocol.java:  private static final Set<String> FIELD_RESERVED = Set.of("name", "type", "doc", "default", "aliases");
+Protocol.java:  public static final Schema SYSTEM_ERROR = Schema.create(Schema.Type.STRING);
+Protocol.java:  public static final Schema SYSTEM_ERRORS = Schema.createUnion(Collections.singletonList(SYSTEM_ERROR));
+Protocol.java:  private static final Set<String> PROTOCOL_RESERVED = Set.of("namespace", "protocol", "doc", "messages", "types",
+Protocol.java:  public static Protocol parse(File file) throws IOException {
+Protocol.java:  public static Protocol parse(InputStream stream) throws IOException {
+Protocol.java:  public static Protocol parse(String string, String... more) {
+Protocol.java:  public static Protocol parse(String string) {
+Protocol.java:  private static Protocol parse(JsonParser parser) {
+Protocol.java:  public static void main(String[] args) throws Exception {
+message/RawMessageEncoder.java:  private static final ThreadLocal<BufferOutputStream> TEMP = ThreadLocalWithInitial.of(BufferOutputStream::new);
+message/RawMessageEncoder.java:  private static final ThreadLocal<BinaryEncoder> ENCODER = new ThreadLocal<>();
+message/RawMessageEncoder.java:  private static class BufferOutputStream extends ByteArrayOutputStream {
+Schema.java:import static org.apache.avro.LogicalType.LOGICAL_TYPE_PROP;
+Schema.java: * Construct a schema using one of its static <tt>createXXX</tt> methods, or
+Schema.java:  private static final long serialVersionUID = 1L;
+Schema.java:  private static final class SerializableSchema implements Serializable {
+Schema.java:    private static final long serialVersionUID = 1L;
+Schema.java:  static final JsonFactory FACTORY = new JsonFactory();
+Schema.java:  static final Logger LOG = LoggerFactory.getLogger(Schema.class);
+Schema.java:  static final ObjectMapper MAPPER = new ObjectMapper(FACTORY);
+Schema.java:  private static final int NO_HASHCODE = Integer.MIN_VALUE;
+Schema.java:  static {
+Schema.java:  public static Schema create(Type type) {
+Schema.java:  private static final Set<String> SCHEMA_RESERVED = new LinkedHashSet<>(
+Schema.java:  private static final Set<String> ENUM_RESERVED = new LinkedHashSet<>(SCHEMA_RESERVED);
+Schema.java:  static {
+Schema.java:  public static Schema createRecord(List<Field> fields) {
+Schema.java:  public static Schema createRecord(String name, String doc, String namespace, boolean isError) {
+Schema.java:  public static Schema createRecord(String name, String doc, String namespace, boolean isError, List<Field> fields) {
+Schema.java:  public static Schema createEnum(String name, String doc, String namespace, List<String> values) {
+Schema.java:  public static Schema createEnum(String name, String doc, String namespace, List<String> values, String enumDefault) {
+Schema.java:  public static Schema createArray(Schema elementType) {
+Schema.java:  public static Schema createMap(Schema valueType) {
+Schema.java:  public static Schema createUnion(List<Schema> types) {
+Schema.java:  public static Schema createUnion(Schema... types) {
+Schema.java:  public static Schema createFixed(String name, String doc, String space, int size) {
+Schema.java:  private static final Set<String> FIELD_RESERVED = Collections
+Schema.java:  public static class Field extends JsonProperties {
+Schema.java:    static {
+Schema.java:    public static final Object NULL_DEFAULT_VALUE = new Object();
+Schema.java:  static class Name {
+Schema.java:  private static abstract class NamedSchema extends Schema {
+Schema.java:  public static class SeenPair {
+Schema.java:  private static final ThreadLocal<Set<SeenPair>> SEEN_EQUALS = ThreadLocalWithInitial.of(LinkedHashSet::new);
+Schema.java:  private static final ThreadLocal<Map<Schema, Schema>> SEEN_HASHCODE = ThreadLocalWithInitial.of(IdentityHashMap::new);
+Schema.java:  private static class RecordSchema extends NamedSchema {
+Schema.java:  private static class EnumSchema extends NamedSchema {
+Schema.java:  private static class ArraySchema extends Schema {
+Schema.java:  private static class MapSchema extends Schema {
+Schema.java:  private static class UnionSchema extends Schema {
+Schema.java:  private static class FixedSchema extends NamedSchema {
+Schema.java:  private static class StringSchema extends Schema {
+Schema.java:  private static class BytesSchema extends Schema {
+Schema.java:  private static class IntSchema extends Schema {
+Schema.java:  private static class LongSchema extends Schema {
+Schema.java:  private static class FloatSchema extends Schema {
+Schema.java:  private static class DoubleSchema extends Schema {
+Schema.java:  private static class BooleanSchema extends Schema {
+Schema.java:  private static class NullSchema extends Schema {
+Schema.java:  public static class Parser {
+Schema.java:  public static Schema parse(File file) throws IOException {
+Schema.java:  public static Schema parse(InputStream in) throws IOException {
+Schema.java:  public static Schema parse(String jsonSchema) {
+Schema.java:  public static Schema parse(String jsonSchema, boolean validate) {
+Schema.java:  static final Map<String, Type> PRIMITIVES = new LinkedHashMap<>();
+Schema.java:  static {
+Schema.java:  static class Names extends LinkedHashMap<Name, Schema> {
+Schema.java:    private static final long serialVersionUID = 1L;
+Schema.java:  private static final ThreadLocal<NameValidator> VALIDATE_NAMES = ThreadLocalWithInitial
+Schema.java:  private static String validateName(String name) {
+Schema.java:  public static void setNameValidator(final NameValidator validator) {
+Schema.java:  public static NameValidator getNameValidator() {
+Schema.java:  private static final ThreadLocal<Boolean> VALIDATE_DEFAULTS = ThreadLocalWithInitial.of(() -> true);
+Schema.java:  private static JsonNode validateDefault(String fieldName, Schema schema, JsonNode defaultValue) {
+Schema.java:  public static void setValidateDefaults(boolean validateDefaults) {
+Schema.java:  public static boolean getValidateDefaults() {
+Schema.java:  private static boolean isValidDefault(Schema schema, JsonNode defaultValue) {
+Schema.java:  private static boolean isValidValue(Schema schema, JsonNode value) {
+Schema.java:  static Schema parse(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static Schema parsePrimitive(JsonNode schema, String type) {
+Schema.java:  private static Schema parseRecord(JsonNode schema, ParseContext context, String currentNameSpace,
+Schema.java:  private static Field parseField(JsonNode field, ParseContext context, String namespace) {
+Schema.java:  private static Schema parseEnum(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static Schema parseArray(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static Schema parseMap(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static Schema parseFixed(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static UnionSchema parseUnion(JsonNode schema, ParseContext context, String currentNameSpace) {
+Schema.java:  private static void parsePropertiesAndLogicalType(JsonNode jsonNode, Schema result, Set<String> propertiesToSkip) {
+Schema.java:  private static void parseProperties(JsonNode schema, JsonProperties result, Set<String> propertiesToSkip) {
+Schema.java:  private static Name parseName(JsonNode schema, String currentNameSpace) {
+Schema.java:  private static String parseDoc(JsonNode schema) {
+Schema.java:  private static void parseAliases(JsonNode schema, Schema result) {
+Schema.java:  static Set<String> parseAliases(JsonNode node) {
+Schema.java:  private static String getRequiredText(JsonNode container, String key, String error) {
+Schema.java:  private static String getOptionalText(JsonNode container, String key) {
+Schema.java:  static JsonNode parseJson(String s) {
+Schema.java:  public static Object parseJsonToObject(String s) {
+Schema.java:  public static Schema applyAliases(Schema writer, Schema reader) {
+Schema.java:  private static Schema applyAliases(Schema s, Map<Schema, Schema> seen, Map<Name, Name> aliases,
+Schema.java:  private static void getAliases(Schema schema, Map<Schema, Schema> seen, Map<Name, Name> aliases,
+Schema.java:  private static String getFieldAlias(Name record, String field, Map<Name, Map<String, String>> fieldAliases) {
+Schema.java:  static class LockableArrayList<E> extends ArrayList<E> {
+Schema.java:    private static final long serialVersionUID = 1L;
+ParseContext.java:import static java.util.Objects.requireNonNull;
+ParseContext.java:  private static final Map<String, Schema.Type> PRIMITIVES = new HashMap<>();
+ParseContext.java:  static {
+ParseContext.java:  private static final Set<Schema.Type> NAMED_SCHEMA_TYPES = EnumSet.of(Schema.Type.RECORD, Schema.Type.ENUM,
+Conversions.java:  public static class UUIDConversion extends Conversion<UUID> {
+Conversions.java:  public static class DecimalConversion extends Conversion<BigDecimal> {
+Conversions.java:    private static BigDecimal validate(final LogicalTypes.Decimal decimal, BigDecimal value) {
+Conversions.java:  public static class BigDecimalConversion extends Conversion<BigDecimal> {
+Conversions.java:  public static class DurationConversion extends Conversion<TimePeriod> {
+Conversions.java:  public static Object convertToLogicalType(Object datum, Schema schema, LogicalType type, Conversion<?> conversion) {
+Conversions.java:  public static <T> Object convertToRawType(Object datum, Schema schema, LogicalType type, Conversion<T> conversion) {
+SchemaFormatterFactory.java:  static final Pattern SIMPLE_NAME_PATTERN = Pattern.compile(
+file/XZCodec.java:  public final static int DEFAULT_COMPRESSION = 6;
+file/XZCodec.java:  private static final int DEFAULT_BUFFER_SIZE = 8192;
+file/XZCodec.java:  static class Option extends CodecFactory {
+util/ClassUtils.java:  public static Class<?> forName(String className) throws ClassNotFoundException {
+util/ClassUtils.java:  public static Class<?> forName(Class<?> contextClass, String className) throws ClassNotFoundException {
+util/ClassUtils.java:  public static Class<?> forName(ClassLoader classLoader, String className) throws ClassNotFoundException {
+util/ClassUtils.java:  private static Class<?> forName(String className, ClassLoader classLoader) {
+file/DataFileStream.java:  public static final class Header {
+file/DataFileStream.java:  static class DataBlock {
+util/SchemaUtil.java:  public static String describe(Schema schema) {
+util/SchemaUtil.java:  public static String describe(Object datum) {
+util/MapUtil.java:  public static <K, V> V computeIfAbsent(ConcurrentMap<K, V> map, K key, Function<K, V> mappingFunction) {
+util/ReusableByteBufferInputStream.java:  private static final ByteBuffer EMPTY_BUFFER = ByteBuffer.allocate(0);
+file/SnappyCodec.java:  static class Option extends CodecFactory {
+file/SnappyCodec.java:    static {
+util/SchemaResolver.java:import static java.util.Objects.requireNonNull;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.ARRAY;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.ENUM;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.FIXED;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.MAP;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.RECORD;
+util/SchemaResolver.java:import static org.apache.avro.Schema.Type.UNION;
+util/SchemaResolver.java:  private static final String UR_SCHEMA_ATTR = "org.apache.avro.idl.unresolved.name";
+util/SchemaResolver.java:  private static final String UR_SCHEMA_NAME = "UnresolvedSchema";
+util/SchemaResolver.java:  private static final String UR_SCHEMA_NS = "org.apache.avro.compiler";
+util/SchemaResolver.java:  private static final AtomicInteger COUNTER = new AtomicInteger();
+util/SchemaResolver.java:  public static Schema unresolvedSchema(final String name) {
+util/SchemaResolver.java:  public static boolean isUnresolvedSchema(final Schema schema) {
+util/SchemaResolver.java:  public static String getUnresolvedSchemaName(final Schema schema) {
+util/SchemaResolver.java:  public static boolean isFullyResolvedSchema(final Schema schema) {
+util/SchemaResolver.java:  public static final class IsResolvedSchemaVisitor implements SchemaVisitor<Boolean> {
+util/SchemaResolver.java:  public static final class ResolvingVisitor implements SchemaVisitor<Void> {
+util/SchemaResolver.java:    private static final Set<Schema.Type> CONTAINER_SCHEMA_TYPES = EnumSet.of(RECORD, ARRAY, MAP, UNION);
+util/SchemaResolver.java:    private static final Set<Schema.Type> NAMED_SCHEMA_TYPES = EnumSet.of(RECORD, ENUM, FIXED);
+util/TimePeriod.java:import static java.time.temporal.ChronoUnit.DAYS;
+util/TimePeriod.java:import static java.time.temporal.ChronoUnit.MILLIS;
+util/TimePeriod.java:import static java.time.temporal.ChronoUnit.MONTHS;
+util/TimePeriod.java:import static java.util.Collections.unmodifiableList;
+util/TimePeriod.java:import static java.util.Objects.requireNonNull;
+util/TimePeriod.java:  private static final long MAX_UNSIGNED_INT = 0xffffffffL;
+util/TimePeriod.java:  private static final long MONTHS_PER_YEAR = 12;
+util/TimePeriod.java:  private static final long MONTHS_PER_DECADE = MONTHS_PER_YEAR * 10;
+util/TimePeriod.java:  private static final long MONTHS_PER_CENTURY = MONTHS_PER_DECADE * 10;
+util/TimePeriod.java:  private static final long MONTHS_PER_MILLENNIUM = MONTHS_PER_CENTURY * 10;
+util/TimePeriod.java:  private static final long MILLIS_PER_SECOND = 1_000;
+util/TimePeriod.java:  private static final long MILLIS_PER_MINUTE = MILLIS_PER_SECOND * 60;
+util/TimePeriod.java:  private static final long MILLIS_PER_HOUR = MILLIS_PER_MINUTE * 60;
+util/TimePeriod.java:  private static final long MILLIS_IN_HALF_DAY = MILLIS_PER_HOUR * 12;
+util/TimePeriod.java:  private static final long MICROS_PER_MILLI = 1_000;
+util/TimePeriod.java:  private static final long NANOS_PER_MILLI = 1_000_000;
+util/TimePeriod.java:  public static TimePeriod from(TemporalAmount amount) {
+util/TimePeriod.java:  public static TimePeriod of(long months, long days, long millis) {
+util/TimePeriod.java:  private static long unsignedInt(long number) {
+file/ZstandardLoader.java:  static InputStream input(InputStream compressed, boolean useBufferPool) throws IOException {
+file/ZstandardLoader.java:  static OutputStream output(OutputStream compressed, int level, boolean checksum, boolean useBufferPool)
+io/FastReaderBuilder.java:  public static FastReaderBuilder get() {
+io/FastReaderBuilder.java:  public static FastReaderBuilder getSpecific() {
+io/FastReaderBuilder.java:  public static boolean isSupportedData(GenericData data) {
+io/FastReaderBuilder.java:  public static FieldReader reusingReader(ReusingFieldReader reader) {
+io/FastReaderBuilder.java:  public static class RecordReader implements FieldReader {
+io/FastReaderBuilder.java:  public static class MapReader implements FieldReader {
+io/ValidatingDecoder.java:  private static Symbol getSymbol(Schema schema) {
+file/DataFileWriter.java:import static java.nio.charset.StandardCharsets.UTF_8;
+file/DataFileWriter.java:  private static final SecureRandom RNG = new SecureRandom();
+file/DataFileWriter.java:  private static byte[] generateSync() {
+file/DataFileWriter.java:  public static boolean isReservedMeta(String key) {
+file/DataFileWriter.java:  public static class AppendWriteException extends RuntimeException {
+file/DataFileWriter.java:  private static class BufferedFileOutputStream extends BufferedOutputStream {
+util/RandomData.java:  public static final String USE_DEFAULT = "use-default";
+util/RandomData.java:  private static final int MILLIS_IN_DAY = (int) Duration.ofDays(1).toMillis();
+util/RandomData.java:  private static final Charset UTF8 = StandardCharsets.UTF_8;
+util/RandomData.java:  private static ByteBuffer randomBytes(Random rand, int maxLength) {
+util/RandomData.java:  public static void main(String[] args) throws Exception {
+util/springframework/ConcurrentReferenceHashMap.java:  private static final int DEFAULT_INITIAL_CAPACITY = 16;
+util/springframework/ConcurrentReferenceHashMap.java:  private static final float DEFAULT_LOAD_FACTOR = 0.75f;
+util/springframework/ConcurrentReferenceHashMap.java:  private static final int DEFAULT_CONCURRENCY_LEVEL = 16;
+util/springframework/ConcurrentReferenceHashMap.java:  private static final ReferenceType DEFAULT_REFERENCE_TYPE = ReferenceType.SOFT;
+util/springframework/ConcurrentReferenceHashMap.java:  private static final int MAXIMUM_CONCURRENCY_LEVEL = 1 << 16;
+util/springframework/ConcurrentReferenceHashMap.java:  private static final int MAXIMUM_SEGMENT_SIZE = 1 << 30;
+util/springframework/ConcurrentReferenceHashMap.java:  protected static int calculateShift(int minimumValue, int maximumValue) {
+util/springframework/ConcurrentReferenceHashMap.java:  protected static final class Entry<K, V> implements Map.Entry<K, V> {
+util/springframework/ConcurrentReferenceHashMap.java:  private static final class SoftEntryReference<K, V> extends SoftReference<Entry<K, V>> implements Reference<K, V> {
+util/springframework/ConcurrentReferenceHashMap.java:  private static final class WeakEntryReference<K, V> extends WeakReference<Entry<K, V>> implements Reference<K, V> {
+util/Schemas.java:  public static <T> T visit(final Schema start, final SchemaVisitor<T> visitor) {
+util/Schemas.java:  private static boolean visitNonTerminal(final SchemaVisitor<?> visitor, final Schema schema, final Deque<Object> dq,
+util/Schemas.java:  private static boolean visitTerminal(final SchemaVisitor<?> visitor, final Schema schema, final Deque<Object> dq) {
+io/JsonEncoder.java:  private static final String LINE_SEPARATOR = System.lineSeparator();
+io/JsonEncoder.java:  private static JsonGenerator getJsonGenerator(OutputStream out, Set<JsonOptions> options) throws IOException {
+file/BZip2Codec.java:  public static final int DEFAULT_BUFFER_SIZE = 64 * 1024;
+file/BZip2Codec.java:  static class Option extends CodecFactory {
+util/springframework/ObjectUtils.java:  private static final int INITIAL_HASH = 7;
+util/springframework/ObjectUtils.java:  private static final int MULTIPLIER = 31;
+util/springframework/ObjectUtils.java:  public static boolean isEmpty(@Nullable Object[] array) {
+util/springframework/ObjectUtils.java:  public static boolean nullSafeEquals(@Nullable Object o1, @Nullable Object o2) {
+util/springframework/ObjectUtils.java:  private static boolean arrayEquals(Object o1, Object o2) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable Object obj) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable Object[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable boolean[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable byte[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable char[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable double[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable float[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable int[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable long[] array) {
+util/springframework/ObjectUtils.java:  public static int nullSafeHashCode(@Nullable short[] array) {
+util/Utf8.java:  private static final byte[] EMPTY = new byte[0];
+util/Utf8.java:  public static byte[] getBytesFor(String str) {
+util/Utf8.java:  public static int compareSequences(CharSequence cs1, CharSequence cs2) {
+io/BufferedBinaryEncoder.java:  private abstract static class ByteSink {
+io/BufferedBinaryEncoder.java:  static class OutputStreamSink extends ByteSink {
+util/springframework/Assert.java:  public static void state(boolean expression, String message) {
+util/springframework/Assert.java:  public static void isTrue(boolean expression, String message) {
+util/springframework/Assert.java:  public static void notNull(@Nullable Object object, String message) {
+file/Codec.java:  protected static int computeOffset(ByteBuffer data) {
+io/BinaryData.java:  private static class Decoders {
+io/BinaryData.java:  private static final ThreadLocal<Decoders> DECODERS = ThreadLocalWithInitial.of(Decoders::new);
+io/BinaryData.java:  public static int compare(byte[] b1, int s1, byte[] b2, int s2, Schema schema) {
+io/BinaryData.java:  public static int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2, Schema schema) {
+io/BinaryData.java:  private static int compare(Decoders d, Schema schema) throws IOException {
+io/BinaryData.java:  public static int compareBytes(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
+io/BinaryData.java:  private static class HashData {
+io/BinaryData.java:  private static final ThreadLocal<HashData> HASH_DATA = ThreadLocalWithInitial.of(HashData::new);
+io/BinaryData.java:  public static int hashCode(byte[] bytes, int start, int length, Schema schema) {
+io/BinaryData.java:  private static int hashCode(HashData data, Schema schema) throws IOException {
+io/BinaryData.java:  private static int hashBytes(HashData data, int len, boolean rev) throws IOException {
+io/BinaryData.java:  public static int skipLong(final byte[] bytes, int start) {
+io/BinaryData.java:  public static int encodeBoolean(boolean b, byte[] buf, int pos) {
+io/BinaryData.java:  public static int encodeInt(int n, byte[] buf, int pos) {
+io/BinaryData.java:  public static int encodeLong(long n, byte[] buf, int pos) {
+io/BinaryData.java:  public static int encodeFloat(float f, byte[] buf, int pos) {
+io/BinaryData.java:  public static int encodeDouble(double d, byte[] buf, int pos) {
+util/ByteBufferOutputStream.java:  public static final int BUFFER_SIZE = 8192;
+io/JsonDecoder.java:  private static final JsonFactory JSON_FACTORY = new JsonFactory();
+io/JsonDecoder.java:  private static class ReorderBuffer {
+io/JsonDecoder.java:  private static Symbol getSymbol(Schema schema) {
+file/DataFileReader12.java:  private static final byte VERSION = 0;
+file/DataFileReader12.java:  static final byte[] MAGIC = new byte[] { (byte) 'O', (byte) 'b', (byte) 'j', VERSION };
+file/DataFileReader12.java:  private static final long FOOTER_BLOCK = -1;
+file/DataFileReader12.java:  private static final int SYNC_SIZE = 16;
+file/DataFileReader12.java:  private static final String SCHEMA = "schema";
+file/DataFileReader12.java:  private static final String SYNC = "sync";
+file/DataFileReader12.java:  private static final String CODEC = "codec";
+file/DataFileReader12.java:  private static final String NULL_CODEC = "null";
+file/NullCodec.java:  private static final NullCodec INSTANCE = new NullCodec();
+file/NullCodec.java:  static class Option extends CodecFactory {
+file/NullCodec.java:  public static final CodecFactory OPTION = new Option();
+io/BinaryDecoder.java:  static class BufferAccessor {
+io/BinaryDecoder.java:  abstract static class ByteSource extends InputStream {
+io/BinaryDecoder.java:  private static class InputStreamByteSource extends ByteSource {
+io/BinaryDecoder.java:  private static class ByteArrayByteSource extends ByteSource {
+io/BinaryDecoder.java:    private static final int MIN_SIZE = 16;
+file/CodecFactory.java:  private static final Logger LOG = LoggerFactory.getLogger(CodecFactory.class);
+file/CodecFactory.java:  public static CodecFactory nullCodec() {
+file/CodecFactory.java:  public static CodecFactory deflateCodec(int compressionLevel) {
+file/CodecFactory.java:  public static CodecFactory xzCodec(int compressionLevel) {
+file/CodecFactory.java:  public static CodecFactory snappyCodec() {
+file/CodecFactory.java:  public static CodecFactory bzip2Codec() {
+file/CodecFactory.java:  public static CodecFactory zstandardCodec(int level) {
+file/CodecFactory.java:  public static CodecFactory zstandardCodec(int level, boolean useChecksum) {
+file/CodecFactory.java:  public static CodecFactory zstandardCodec(int level, boolean useChecksum, boolean useBufferPool) {
+file/CodecFactory.java:  private static final Map<String, CodecFactory> REGISTERED = new HashMap<>();
+file/CodecFactory.java:  public static final int DEFAULT_DEFLATE_LEVEL = Deflater.DEFAULT_COMPRESSION;
+file/CodecFactory.java:  public static final int DEFAULT_XZ_LEVEL = XZCodec.DEFAULT_COMPRESSION;
+file/CodecFactory.java:  public static final int DEFAULT_ZSTANDARD_LEVEL = ZstandardCodec.DEFAULT_COMPRESSION;
+file/CodecFactory.java:  public static final boolean DEFAULT_ZSTANDARD_BUFFERPOOL = ZstandardCodec.DEFAULT_USE_BUFFERPOOL;
+file/CodecFactory.java:  static {
+file/CodecFactory.java:  public static CodecFactory fromString(String s) {
+file/CodecFactory.java:  public static CodecFactory addCodec(String name, CodecFactory c) {
+io/EncoderFactory.java:  private static final int DEFAULT_BUFFER_SIZE = 2048;
+io/EncoderFactory.java:  private static final int DEFAULT_BLOCK_BUFFER_SIZE = 64 * 1024;
+io/EncoderFactory.java:  private static final int MIN_BLOCK_BUFFER_SIZE = 64;
+io/EncoderFactory.java:  private static final int MAX_BLOCK_BUFFER_SIZE = 1024 * 1024 * 1024;
+io/EncoderFactory.java:  private static final EncoderFactory DEFAULT_FACTORY = new DefaultEncoderFactory();
+io/EncoderFactory.java:   * Returns an immutable static DecoderFactory with default configuration. All
+io/EncoderFactory.java:  public static EncoderFactory get() {
+io/EncoderFactory.java:  private static class DefaultEncoderFactory extends EncoderFactory {
+file/ZstandardCodec.java:  public final static int DEFAULT_COMPRESSION = 3;
+file/ZstandardCodec.java:  public final static boolean DEFAULT_USE_BUFFERPOOL = false;
+file/ZstandardCodec.java:  private static final int DEFAULT_BUFFER_SIZE = 8192;
+file/ZstandardCodec.java:  static class Option extends CodecFactory {
+util/internal/JacksonUtils.java:  private static final ObjectMapper MAPPER = new ObjectMapper();
+util/internal/JacksonUtils.java:  private static final ObjectMapper OBJECT_TO_MAP_MAPPER = MAPPER.copy()
+util/internal/JacksonUtils.java:  public static JsonNode toJsonNode(Object datum) {
+util/internal/JacksonUtils.java:  static void toJson(Object datum, JsonGenerator generator) throws IOException {
+util/internal/JacksonUtils.java:  public static Object toObject(JsonNode jsonNode) {
+util/internal/JacksonUtils.java:  public static Object toObject(JsonNode jsonNode, Schema schema) {
+util/internal/JacksonUtils.java:  public static Map objectToMap(Object datum) {
+file/DeflateCodec.java:  private static final int DEFAULT_BUFFER_SIZE = 8192;
+file/DeflateCodec.java:  static class Option extends CodecFactory {
+util/internal/ThreadLocalWithInitial.java:  public static <T> ThreadLocal<T> of(Supplier<? extends T> supplier) {
+file/DataFileReader.java:import static org.apache.avro.file.DataFileConstants.MAGIC;
+file/DataFileReader.java:import static org.apache.avro.file.DataFileConstants.SYNC_SIZE;
+file/DataFileReader.java:  public static <D> FileReader<D> openReader(File file, DatumReader<D> reader) throws IOException {
+file/DataFileReader.java:  public static <D> FileReader<D> openReader(SeekableInput in, DatumReader<D> reader) throws IOException {
+file/DataFileReader.java:  public static <D> DataFileReader<D> openReader(SeekableInput in, DatumReader<D> reader, Header header, boolean sync)
+file/DataFileReader.java:  static class SeekableInputStream extends InputStream implements SeekableInput {
+io/BlockingBinaryEncoder.java:  private static class BlockedValue {
+io/BlockingBinaryEncoder.java:  private static final int STACK_STEP = 10;
+file/DataFileConstants.java:  public static final byte VERSION = 1;
+file/DataFileConstants.java:  public static final byte[] MAGIC = new byte[] { (byte) 'O', (byte) 'b', (byte) 'j', VERSION };
+file/DataFileConstants.java:  public static final int SYNC_SIZE = 16;
+file/DataFileConstants.java:  public static final int DEFAULT_SYNC_INTERVAL = 4000 * SYNC_SIZE;
+file/DataFileConstants.java:  public static final String SCHEMA = "avro.schema";
+file/DataFileConstants.java:  public static final String CODEC = "avro.codec";
+file/DataFileConstants.java:  public static final String NULL_CODEC = "null";
+file/DataFileConstants.java:  public static final String DEFLATE_CODEC = "deflate";
+file/DataFileConstants.java:  public static final String SNAPPY_CODEC = "snappy";
+file/DataFileConstants.java:  public static final String BZIP2_CODEC = "bzip2";
+file/DataFileConstants.java:  public static final String XZ_CODEC = "xz";
+file/DataFileConstants.java:  public static final String ZSTANDARD_CODEC = "zstandard";
+util/internal/Accessor.java:  public abstract static class JsonPropertiesAccessor {
+util/internal/Accessor.java:  public abstract static class FieldAccessor {
+util/internal/Accessor.java:  public abstract static class ResolvingGrammarGeneratorAccessor {
+util/internal/Accessor.java:  public abstract static class EncoderFactoryAccessor {
+util/internal/Accessor.java:  private static volatile JsonPropertiesAccessor jsonPropertiesAccessor;
+util/internal/Accessor.java:  private static volatile FieldAccessor fieldAccessor;
+util/internal/Accessor.java:  private static volatile ResolvingGrammarGeneratorAccessor resolvingGrammarGeneratorAccessor;
+util/internal/Accessor.java:  public static void setAccessor(JsonPropertiesAccessor accessor) {
+util/internal/Accessor.java:  public static void setAccessor(FieldAccessor accessor) {
+util/internal/Accessor.java:  private static FieldAccessor fieldAccessor() {
+util/internal/Accessor.java:  public static void setAccessor(ResolvingGrammarGeneratorAccessor accessor) {
+util/internal/Accessor.java:  private static ResolvingGrammarGeneratorAccessor resolvingGrammarGeneratorAccessor() {
+util/internal/Accessor.java:  private static void ensureLoaded(Class<?> c) {
+util/internal/Accessor.java:  public static void addProp(JsonProperties props, String name, JsonNode value) {
+util/internal/Accessor.java:  public static JsonNode defaultValue(Field field) {
+util/internal/Accessor.java:  public static void encode(Encoder e, Schema s, JsonNode n) throws IOException {
+util/internal/Accessor.java:  public static Field createField(String name, Schema schema, String doc, JsonNode defaultValue, boolean validate,
+util/internal/Accessor.java:  public static Field createField(String name, Schema schema, String doc, JsonNode defaultValue) {
+util/UtfTextUtils.java:  private static final int TRANSFER_BUFFER_SIZE = 4096;
+util/UtfTextUtils.java:  private static final Charset UTF_32 = Charset.forName("UTF-32");
+util/UtfTextUtils.java:  private static final Charset UTF_32BE = Charset.forName("UTF-32BE");
+util/UtfTextUtils.java:  private static final Charset UTF_32LE = Charset.forName("UTF-32LE");
+util/UtfTextUtils.java:  public static String asString(byte[] bytes, Charset charset) {
+util/UtfTextUtils.java:  public static String readAllBytes(InputStream input, Charset charset) throws IOException {
+util/UtfTextUtils.java:  private static InputStream ensureMarkSupport(InputStream input) {
+util/UtfTextUtils.java:  private static int fillBuffer(InputStream in, byte[] buf) throws IOException {
+util/UtfTextUtils.java:  public static String readAllChars(Reader input) throws IOException {
+util/UtfTextUtils.java:  private static String skipBOM(CharSequence buffer) {
+util/UtfTextUtils.java:  public static Charset detectUtfCharset(byte[] firstFewBytes) {
+util/UtfTextUtils.java:  private static Charset detectUtfCharset0(byte[] firstFewBytes, int numBytes) {
+util/UtfTextUtils.java:  private static int quad(byte[] bytes, int length) {
+ValidateMutualRead.java:  static void canRead(Schema writtenWith, Schema readUsing) throws SchemaValidationException {
+SchemaNormalization.java: * Collection of static methods for generating the canonical form of schemas
+SchemaNormalization.java:  public static String toParsingForm(Schema s) {
+SchemaNormalization.java:  public static byte[] fingerprint(String fpName, byte[] data) throws NoSuchAlgorithmException {
+SchemaNormalization.java:  public static long fingerprint64(byte[] data) {
+SchemaNormalization.java:  public static byte[] parsingFingerprint(String fpName, Schema s) throws NoSuchAlgorithmException {
+SchemaNormalization.java:  public static long parsingFingerprint64(Schema s) {
+SchemaNormalization.java:  private static Appendable build(Map<String, String> env, Schema s, Appendable o) throws IOException {
+SchemaNormalization.java:  final static long EMPTY64 = 0xc15d213aa4d7a795L;
+SchemaNormalization.java:  private static class FP64 {
+SchemaNormalization.java:    private static final long[] FP_TABLE = new long[256];
+SchemaNormalization.java:    static {
+reflect/FieldAccess.java:  protected static final int INT_DEFAULT_VALUE = 0;
+reflect/FieldAccess.java:  protected static final float FLOAT_DEFAULT_VALUE = 0.0f;
+reflect/FieldAccess.java:  protected static final short SHORT_DEFAULT_VALUE = (short) 0;
+reflect/FieldAccess.java:  protected static final byte BYTE_DEFAULT_VALUE = (byte) 0;
+reflect/FieldAccess.java:  protected static final boolean BOOLEAN_DEFAULT_VALUE = false;
+reflect/FieldAccess.java:  protected static final char CHAR_DEFAULT_VALUE = '\u0000';
+reflect/FieldAccess.java:  protected static final long LONG_DEFAULT_VALUE = 0L;
+reflect/FieldAccess.java:  protected static final double DOUBLE_DEFAULT_VALUE = 0.0d;
+reflect/ArrayAccessor.java:  static void writeArray(boolean[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(short[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(char[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(int[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(long[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(float[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static void writeArray(double[] data, Encoder out) throws IOException {
+reflect/ArrayAccessor.java:  static Object readArray(Object array, Class<?> elementType, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static boolean[] readArray(boolean[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static int[] readArray(int[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static short[] readArray(short[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static char[] readArray(char[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static long[] readArray(long[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static float[] readArray(float[] array, long l, ResolvingDecoder in) throws IOException {
+reflect/ArrayAccessor.java:  static double[] readArray(double[] array, long l, ResolvingDecoder in) throws IOException {
+io/parsing/Symbol.java:  static Symbol root(Symbol... symbols) {
+io/parsing/Symbol.java:  static Symbol seq(Symbol... production) {
+io/parsing/Symbol.java:  static Symbol repeat(Symbol endSymbol, Symbol... symsToRepeat) {
+io/parsing/Symbol.java:  static Symbol alt(Symbol[] symbols, String[] labels) {
+io/parsing/Symbol.java:  static Symbol error(String e) {
+io/parsing/Symbol.java:  static Symbol resolve(Symbol w, Symbol r) {
+io/parsing/Symbol.java:  private static class Fixup {
+io/parsing/Symbol.java:  static void flatten(Symbol[] in, int start, Symbol[] out, int skip, Map<Sequence, Sequence> map,
+io/parsing/Symbol.java:  private static void copyFixups(List<Fixup> fixups, Symbol[] out, int outPos, Symbol[] toCopy) {
+io/parsing/Symbol.java:  protected static int flattenedSize(Symbol[] symbols, int start) {
+io/parsing/Symbol.java:  private static class Terminal extends Symbol {
+io/parsing/Symbol.java:  public static class ImplicitAction extends Symbol {
+io/parsing/Symbol.java:  protected static class Root extends Symbol {
+io/parsing/Symbol.java:    private static Symbol[] makeProduction(Symbol[] symbols) {
+io/parsing/Symbol.java:  protected static class Sequence extends Symbol implements Iterable<Symbol> {
+io/parsing/Symbol.java:  public static class Repeater extends Symbol {
+io/parsing/Symbol.java:    private static Symbol[] makeProduction(Symbol[] p) {
+io/parsing/Symbol.java:  public static boolean hasErrors(Symbol symbol) {
+io/parsing/Symbol.java:  private static boolean hasErrors(Symbol symbol, Set<Symbol> visited) {
+io/parsing/Symbol.java:  private static boolean hasErrors(Symbol root, Symbol[] symbols, Set<Symbol> visited) {
+io/parsing/Symbol.java:  public static class Alternative extends Symbol {
+io/parsing/Symbol.java:  public static class ErrorAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static IntCheckAction intCheckAction(int size) {
+io/parsing/Symbol.java:  public static class IntCheckAction extends Symbol {
+io/parsing/Symbol.java:  public static EnumAdjustAction enumAdjustAction(int rsymCount, Object[] adj) {
+io/parsing/Symbol.java:  public static class EnumAdjustAction extends IntCheckAction {
+io/parsing/Symbol.java:  public static WriterUnionAction writerUnionAction() {
+io/parsing/Symbol.java:  public static class WriterUnionAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static class ResolvingAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static SkipAction skipAction(Symbol symToSkip) {
+io/parsing/Symbol.java:  public static class SkipAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static FieldAdjustAction fieldAdjustAction(int rindex, String fname, Set<String> aliases) {
+io/parsing/Symbol.java:  public static class FieldAdjustAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static FieldOrderAction fieldOrderAction(Schema.Field[] fields) {
+io/parsing/Symbol.java:  public static final class FieldOrderAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static DefaultStartAction defaultStartAction(byte[] contents) {
+io/parsing/Symbol.java:  public static class DefaultStartAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static UnionAdjustAction unionAdjustAction(int rindex, Symbol sym) {
+io/parsing/Symbol.java:  public static class UnionAdjustAction extends ImplicitAction {
+io/parsing/Symbol.java:  public static EnumLabelsAction enumLabelsAction(List<String> symbols) {
+io/parsing/Symbol.java:  public static class EnumLabelsAction extends IntCheckAction {
+io/parsing/Symbol.java:  public static final Symbol NULL = new Symbol.Terminal("null");
+io/parsing/Symbol.java:  public static final Symbol BOOLEAN = new Symbol.Terminal("boolean");
+io/parsing/Symbol.java:  public static final Symbol INT = new Symbol.Terminal("int");
+io/parsing/Symbol.java:  public static final Symbol LONG = new Symbol.Terminal("long");
+io/parsing/Symbol.java:  public static final Symbol FLOAT = new Symbol.Terminal("float");
+io/parsing/Symbol.java:  public static final Symbol DOUBLE = new Symbol.Terminal("double");
+io/parsing/Symbol.java:  public static final Symbol STRING = new Symbol.Terminal("string");
+io/parsing/Symbol.java:  public static final Symbol BYTES = new Symbol.Terminal("bytes");
+io/parsing/Symbol.java:  public static final Symbol FIXED = new Symbol.Terminal("fixed");
+io/parsing/Symbol.java:  public static final Symbol ENUM = new Symbol.Terminal("enum");
+io/parsing/Symbol.java:  public static final Symbol UNION = new Symbol.Terminal("union");
+io/parsing/Symbol.java:  public static final Symbol ARRAY_START = new Symbol.Terminal("array-start");
+io/parsing/Symbol.java:  public static final Symbol ARRAY_END = new Symbol.Terminal("array-end");
+io/parsing/Symbol.java:  public static final Symbol MAP_START = new Symbol.Terminal("map-start");
+io/parsing/Symbol.java:  public static final Symbol MAP_END = new Symbol.Terminal("map-end");
+io/parsing/Symbol.java:  public static final Symbol ITEM_END = new Symbol.Terminal("item-end");
+io/parsing/Symbol.java:  public static final Symbol WRITER_UNION_ACTION = writerUnionAction();
+io/parsing/Symbol.java:  public static final Symbol FIELD_ACTION = new Symbol.Terminal("field-action");
+io/parsing/Symbol.java:  public static final Symbol RECORD_START = new ImplicitAction(false);
+io/parsing/Symbol.java:  public static final Symbol RECORD_END = new ImplicitAction(true);
+io/parsing/Symbol.java:  public static final Symbol UNION_END = new ImplicitAction(true);
+io/parsing/Symbol.java:  public static final Symbol FIELD_END = new ImplicitAction(true);
+io/parsing/Symbol.java:  public static final Symbol DEFAULT_END_ACTION = new ImplicitAction(true);
+io/parsing/Symbol.java:  public static final Symbol MAP_KEY_MARKER = new Symbol.Terminal("map-key-marker");
+specific/SpecificData.java:  private static final SpecificData INSTANCE = new SpecificData();
+specific/SpecificData.java:  static {
+specific/SpecificData.java:  protected static void addLogicalTypeConversions(SpecificData instance) {
+specific/SpecificData.java:  private static final Class<?>[] NO_ARG = new Class[] {};
+specific/SpecificData.java:  private static final Class<?>[] SCHEMA_ARG = new Class[] { Schema.class };
+specific/SpecificData.java:  private static final Function<Class<?>, Constructor<?>> CTOR_CACHE = new ClassValueCache<>(c -> {
+specific/SpecificData.java:  private static final Function<Class<?>, SpecificData> MODEL_CACHE = new ClassValueCache<>(c -> {
+specific/SpecificData.java:  public static final String CLASS_PROP = "java-class";
+specific/SpecificData.java:  public static final String KEY_CLASS_PROP = "java-key-class";
+specific/SpecificData.java:  public static final String ELEMENT_PROP = "java-element-class";
+specific/SpecificData.java:  public static final char RESERVED_WORD_ESCAPE_CHAR = '$';
+specific/SpecificData.java:  public static final Set<String> RESERVED_WORDS = new LinkedHashSet<>(Arrays.asList(
+specific/SpecificData.java:      "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this",
+specific/SpecificData.java:  public static final Set<String> ACCESSOR_MUTATOR_RESERVED_WORDS = new LinkedHashSet<>(
+specific/SpecificData.java:  static {
+specific/SpecificData.java:  public static final Set<String> TYPE_IDENTIFIER_RESERVED_WORDS = new LinkedHashSet<>(
+specific/SpecificData.java:  static {
+specific/SpecificData.java:  public static final Set<String> ERROR_RESERVED_WORDS = new LinkedHashSet<>(Arrays.asList("message", "cause"));
+specific/SpecificData.java:  static {
+specific/SpecificData.java:  public static SpecificData get() {
+specific/SpecificData.java:  public static SpecificData getForSchema(Schema reader) {
+specific/SpecificData.java:  public static <T> SpecificData getForClass(Class<T> c) {
+specific/SpecificData.java:  private static final Class NO_CLASS = new Object() {
+specific/SpecificData.java:  private static final Schema NULL_SCHEMA = Schema.create(Schema.Type.NULL);
+specific/SpecificData.java:  public static String mangleFullyQualified(String fullName) {
+specific/SpecificData.java:  public static String mangle(String word) {
+specific/SpecificData.java:  public static String mangle(String word, boolean isError) {
+specific/SpecificData.java:  public static String mangleTypeIdentifier(String word) {
+specific/SpecificData.java:  public static String mangleTypeIdentifier(String word, boolean isError) {
+specific/SpecificData.java:  public static String mangle(String word, Set<String> reservedWords) {
+specific/SpecificData.java:  public static String mangleMethod(String word, boolean isError) {
+specific/SpecificData.java:  public static String mangle(String word, Set<String> reservedWords, boolean isMethod) {
+specific/SpecificData.java:  protected static String unmangle(String word) {
+specific/SpecificData.java:  public static String getClassName(Schema schema) {
+specific/SpecificData.java:  public static Object newInstance(Class c, Schema s) {
+specific/SpecificData.java:  public static BinaryDecoder getDecoder(ObjectInput in) {
+specific/SpecificData.java:  public static BinaryEncoder getEncoder(ObjectOutput out) {
+io/parsing/ValidatingGrammarGenerator.java:  static class LitS {
+io/parsing/ResolvingGrammarGenerator.java:  static {
+io/parsing/ResolvingGrammarGenerator.java:  private final static EncoderFactory ENCODER_FACTORY = new EncoderFactory().configureBufferSize(32);
+io/parsing/ResolvingGrammarGenerator.java:  private static byte[] getBinary(Schema s, JsonNode n) throws IOException {
+io/parsing/ResolvingGrammarGenerator.java:  public static void encode(Encoder e, Schema s, JsonNode n) throws IOException {
+io/parsing/ResolvingGrammarGenerator.java:  private static boolean isCompatible(Schema.Type stype, JsonNode value) {
+reflect/ReflectionUtil.java:  private static FieldAccess fieldAccess;
+reflect/ReflectionUtil.java:  static {
+reflect/ReflectionUtil.java:  static void resetFieldAccess() {
+reflect/ReflectionUtil.java:  private static <T> T load(String name, Class<T> type) throws Exception {
+reflect/ReflectionUtil.java:  public static FieldAccess getFieldAccess() {
+reflect/ReflectionUtil.java:  private static boolean validate(FieldAccess access) throws Exception {
+reflect/ReflectionUtil.java:  private static final class AccessorTestClass {
+reflect/ReflectionUtil.java:  protected static Map<TypeVariable<?>, Type> resolveTypeVariables(Class<?> iface) {
+reflect/ReflectionUtil.java:  private static Map<TypeVariable<?>, Type> resolveTypeVariables(Class<?> iface, Map<TypeVariable<?>, Type> reuse) {
+reflect/ReflectionUtil.java:  private static <D> Supplier<D> getConstructorAsSupplier(Class<D> clazz) {
+reflect/ReflectionUtil.java:  private static <V, R> Supplier<R> getOneArgConstructorAsSupplier(Class<R> clazz, Class<V> argumentClass, V argument) {
+reflect/ReflectionUtil.java:  public static <V, R> Function<V, R> getConstructorAsFunction(Class<V> parameterClass, Class<R> clazz) {
+reflect/ReflectionUtil.java:  protected static AvroEncode getAvroEncode(Field field) {
+reflect/ReflectionUtil.java:  protected static AvroEncode getAvroEncode(Class<?> clazz) {
+specific/SpecificDatumReader.java:  public static final String[] SERIALIZABLE_PACKAGES;
+specific/SpecificDatumReader.java:  public static final String[] SERIALIZABLE_CLASSES;
+specific/SpecificDatumReader.java:  static {
+specific/SpecificDatumReader.java:  private static Stream<String> streamPropertyEntries(String commaSeparatedEntries) {
+specific/SpecificDatumReader.java:  private static final Set<String> PRIMITIVES = new HashSet<>(Arrays.asList(Boolean.TYPE.getName(),
+reflect/package.html:  that are not static or transient are used.  Fields are not permitted
+reflect/ReflectData.java:  private static final String STRING_OUTER_PARENT_REFERENCE = "this$0";
+reflect/ReflectData.java:  public static class AllowNull extends ReflectData {
+reflect/ReflectData.java:    private static final AllowNull INSTANCE = new AllowNull();
+reflect/ReflectData.java:    public static AllowNull get() {
+reflect/ReflectData.java:  private static final ReflectData INSTANCE = new ReflectData();
+reflect/ReflectData.java:  static {
+reflect/ReflectData.java:  public static ReflectData get() {
+reflect/ReflectData.java:  static final ClassValue<ClassAccessorData> ACCESSOR_CACHE = new ClassValue<ClassAccessorData>() {
+reflect/ReflectData.java:  static class ClassAccessorData {
+reflect/ReflectData.java:  private static final Map<String, Class> CLASS_CACHE = new ConcurrentHashMap<>();
+reflect/ReflectData.java:  static Class getClassProp(Schema schema, String prop) {
+reflect/ReflectData.java:  private static final Class BYTES_CLASS = byte[].class;
+reflect/ReflectData.java:  private static final IdentityHashMap<Class, Class> ARRAY_CLASSES;
+reflect/ReflectData.java:  static {
+reflect/ReflectData.java:  static final String NS_MAP_ARRAY_RECORD = // record name prefix
+reflect/ReflectData.java:  static final String NS_MAP_KEY = "key"; // name of key field
+reflect/ReflectData.java:  static final int NS_MAP_KEY_INDEX = 0; // index of key field
+reflect/ReflectData.java:  static final String NS_MAP_VALUE = "value"; // name of value field
+reflect/ReflectData.java:  static final int NS_MAP_VALUE_INDEX = 1; // index of value field
+reflect/ReflectData.java:  static boolean isNonStringMapSchema(Schema s) {
+reflect/ReflectData.java:                throw new AvroTypeException("Class " + fullName + " must be a static inner class");
+reflect/ReflectData.java:  private static final Schema THROWABLE_MESSAGE = makeNullable(Schema.create(Schema.Type.STRING));
+reflect/ReflectData.java:  public static Schema makeNullable(Schema schema) {
+reflect/ReflectData.java:  private static final ConcurrentMap<Class<?>, Field[]> FIELDS_CACHE = new ConcurrentHashMap<>();
+reflect/ReflectData.java:  private static Field[] getCachedFields(Class<?> recordClass) {
+reflect/ReflectData.java:  private static Field[] getFields(Class<?> recordClass, boolean excludeJava) {
+reflect/ReflectData.java:  private static class CustomEncodingWrapper {
+reflect/FieldAccessReflect.java:  private static class ReflectionBasedAccessor extends FieldAccessor {
+reflect/FieldAccessReflect.java:  private static final class ReflectionBasesAccessorCustomEncoded extends ReflectionBasedAccessor {
+io/BlockingDirectBinaryEncoder.java:  private static class BufferOutputStream extends ByteArrayOutputStream {
+generic/PrimitivesArrays.java:  public static GenericData.AbstractArray<?> createOptimizedArray(int size, Schema schema, Schema.Type valueType) {
+generic/PrimitivesArrays.java:  public abstract static class PrimitiveArray<T> extends GenericData.AbstractArray<T> {
+generic/PrimitivesArrays.java:  public static class IntArray extends PrimitiveArray<Integer> {
+generic/PrimitivesArrays.java:    private static final int[] EMPTY = new int[0];
+generic/PrimitivesArrays.java:  public static class LongArray extends PrimitiveArray<Long> {
+generic/PrimitivesArrays.java:    private static final long[] EMPTY = new long[0];
+generic/PrimitivesArrays.java:  public static class BooleanArray extends PrimitiveArray<Boolean> {
+generic/PrimitivesArrays.java:    private static final byte[] EMPTY = new byte[0];
+generic/PrimitivesArrays.java:  public static class FloatArray extends PrimitiveArray<Float> {
+generic/PrimitivesArrays.java:    private static final float[] EMPTY = new float[0];
+generic/PrimitivesArrays.java:  public static class DoubleArray extends PrimitiveArray<Double> {
+generic/PrimitivesArrays.java:    private static final double[] EMPTY = new double[0];
+SchemaFormatter.java:  static SchemaFormatter getInstance(String name) {
+SchemaFormatter.java:  static String format(String name, Schema schema) {
+SchemaFormatter.java:  static final ServiceLoader<SchemaFormatterFactory> LOADER = ServiceLoader.load(SchemaFormatterFactory.class);
+io/DecoderFactory.java:  private static final DecoderFactory DEFAULT_FACTORY = new DefaultDecoderFactory();
+io/DecoderFactory.java:  static final int DEFAULT_BUFFER_SIZE = 8192;
+io/DecoderFactory.java:  public static DecoderFactory defaultFactory() {
+io/DecoderFactory.java:   * Returns an immutable static DecoderFactory configured with default settings
+io/DecoderFactory.java:  public static DecoderFactory get() {
+io/DecoderFactory.java:  private static class DefaultDecoderFactory extends DecoderFactory {
+data/Json.java:  static final JsonFactory FACTORY = new JsonFactory();
+data/Json.java:  static final ObjectMapper MAPPER = new ObjectMapper(FACTORY);
+data/Json.java:  public static final Schema SCHEMA;
+data/Json.java:  static {
+data/Json.java:  public static class ObjectWriter implements DatumWriter<Object> {
+data/Json.java:  public static class ObjectReader implements DatumReader<Object> {
+data/Json.java:  public static Object parseJson(String s) {
+data/Json.java:  public static String toString(Object datum) {
+data/Json.java:  private static void write(JsonNode node, Encoder out) throws IOException {
+data/Json.java:  private static JsonNode read(Decoder in) throws IOException {
+data/Json.java:  private static void writeObject(Object datum, Encoder out) throws IOException {
+data/Json.java:  private static Object readObject(Decoder in) throws IOException {
+io/ResolvingDecoder.java:  public static Object resolve(Schema writer, Schema reader) throws IOException {
+generic/GenericData.java:import static org.apache.avro.util.springframework.ConcurrentReferenceHashMap.ReferenceType.WEAK;
+generic/GenericData.java:  private static final GenericData INSTANCE = new GenericData();
+generic/GenericData.java:  private static final Map<Class<?>, String> PRIMITIVE_DATUM_TYPES = new IdentityHashMap<>();
+generic/GenericData.java:  static {
+generic/GenericData.java:  public static final String STRING_PROP = "avro.java.string";
+generic/GenericData.java:  protected static final String STRING_TYPE_STRING = "String";
+generic/GenericData.java:  public static void setStringType(Schema s, StringType stringType) {
+generic/GenericData.java:  public static GenericData get() {
+generic/GenericData.java:  public static final String FAST_READER_PROP = "org.apache.avro.fastread";
+generic/GenericData.java:  public static class Record implements GenericRecord, Comparable<Record> {
+generic/GenericData.java:  public static abstract class AbstractArray<T> extends AbstractList<T>
+generic/GenericData.java:  public static class Array<T> extends AbstractArray<T> {
+generic/GenericData.java:    private static final Object[] EMPTY = new Object[0];
+generic/GenericData.java:  public static class Fixed implements GenericFixed, Comparable<Fixed> {
+generic/GenericData.java:  public static class EnumSymbol implements GenericEnumSymbol<EnumSymbol> {
+generic/GenericData.java:  private static final String TOSTRING_CIRCULAR_REFERENCE_ERROR_TEXT = " \">>> CIRCULAR REFERENCE CANNOT BE PUT IN JSON STRING, ABORTING RECURSION <<<\" ";
+generic/GenericData.java:  private static void writeEscapedString(CharSequence string, StringBuilder builder) {
+generic/GenericData.java:  private static final Schema STRINGS = Schema.create(Type.STRING);
+generic/GenericData.java:  public static Schema.Type optimalValueType(Schema schema, LogicalType logicalType, Class<?> convertedElementType) {
+generic/GenericData.java:  private final static Map<Class<?>, Schema.Type> PRIMITIVE_TYPES_WITH_SPECIALISED_ARRAYS = Map.of(//
+SchemaCompatibility.java:  private static final Logger LOG = LoggerFactory.getLogger(SchemaCompatibility.class);
+SchemaCompatibility.java:  public static final String READER_WRITER_COMPATIBLE_MESSAGE = "Reader schema can always successfully decode data written using the writer schema.";
+SchemaCompatibility.java:  public static SchemaPairCompatibility checkReaderWriterCompatibility(final Schema reader, final Schema writer) {
+SchemaCompatibility.java:  public static boolean schemaNameEquals(final Schema reader, final Schema writer) {
+SchemaCompatibility.java:  public static Field lookupWriterField(final Schema writerSchema, final Field readerField) {
+SchemaCompatibility.java:  private static final class ReaderWriter {
+SchemaCompatibility.java:  private static final class ReaderWriterCompatibilityChecker {
+SchemaCompatibility.java:    private static final String ROOT_REFERENCE_TOKEN = "";
+SchemaCompatibility.java:  public static final class SchemaCompatibilityResult {
+SchemaCompatibility.java:    private static final SchemaCompatibilityResult COMPATIBLE = new SchemaCompatibilityResult(
+SchemaCompatibility.java:    private static final SchemaCompatibilityResult RECURSION_IN_PROGRESS = new SchemaCompatibilityResult(
+SchemaCompatibility.java:    public static SchemaCompatibilityResult compatible() {
+SchemaCompatibility.java:    public static SchemaCompatibilityResult recursionInProgress() {
+SchemaCompatibility.java:    public static SchemaCompatibilityResult incompatible(SchemaIncompatibilityType incompatibilityType,
+SchemaCompatibility.java:  public static final class Incompatibility {
+SchemaCompatibility.java:  public static final class SchemaPairCompatibility {
+SchemaCompatibility.java:  private static boolean objectsEqual(Object obj1, Object obj2) {
+SchemaCompatibility.java:  private static List<String> asList(Deque<String> deque) {
+allStatic.log:Resolver.java:  public static Action resolve(Schema writer, Schema reader, GenericData data) {
+allStatic.log:Resolver.java:  public static Action resolve(Schema writer, Schema reader) {
+allStatic.log:Resolver.java:  private static Action resolve(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+allStatic.log:Resolver.java:  public static abstract class Action {
+allStatic.log:Resolver.java:  public static class DoNothing extends Action {
+allStatic.log:Resolver.java:  public static class ErrorAction extends Action {
+allStatic.log:Resolver.java:  public static class Promote extends Action {
+allStatic.log:Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d) {
+allStatic.log:Resolver.java:    public static boolean isValid(Schema w, Schema r) {
+allStatic.log:Resolver.java:  public static class Container extends Action {
+allStatic.log:Resolver.java:  public static class EnumAdjust extends Action {
+allStatic.log:Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d) {
+allStatic.log:Resolver.java:  public static class Skip extends Action {
+allStatic.log:Resolver.java:  public static class RecordAdjust extends Action {
+allStatic.log:Resolver.java:    static Action resolve(Schema writeSchema, Schema readSchema, GenericData data, Map<SeenPair, Action> seen) {
+allStatic.log:Resolver.java:  public static class WriterUnion extends Action {
+allStatic.log:Resolver.java:    public static Action resolve(Schema writeSchema, Schema readSchema, GenericData data, Map<SeenPair, Action> seen) {
+allStatic.log:Resolver.java:  public static class ReaderUnion extends Action {
+allStatic.log:Resolver.java:    public static Action resolve(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+allStatic.log:Resolver.java:    private static int firstMatchingBranch(Schema w, Schema r, GenericData d, Map<SeenPair, Action> seen) {
+allStatic.log:Resolver.java:    private static boolean hasMatchError(Action action) {
+allStatic.log:Resolver.java:  private static boolean unionEquiv(Schema write, Schema read, Map<SeenPair, Boolean> seen) {
+allStatic.log:message/MessageDecoder.java:    private static final ThreadLocal<ReusableByteArrayInputStream> BYTE_ARRAY_IN = ThreadLocalWithInitial
+allStatic.log:message/MessageDecoder.java:    private static final ThreadLocal<ReusableByteBufferInputStream> BYTE_BUFFER_IN = ThreadLocalWithInitial
+allStatic.log:message/RawMessageDecoder.java:  private static final ThreadLocal<BinaryDecoder> DECODER = new ThreadLocal<>();
+allStatic.log:message/BinaryMessageDecoder.java:  private static final ThreadLocal<byte[]> HEADER_BUFFER = ThreadLocalWithInitial.of(() -> new byte[10]);
+allStatic.log:message/BinaryMessageDecoder.java:  private static final ThreadLocal<ByteBuffer> FP_BUFFER = ThreadLocalWithInitial.of(() -> {
+LogicalTypes.java:  private static final Logger LOG = LoggerFactory.getLogger(LogicalTypes.class);
+LogicalTypes.java:  private static final Map<String, LogicalTypeFactory> REGISTERED_TYPES = new ConcurrentHashMap<>();
+LogicalTypes.java:  static {
+LogicalTypes.java:  public static void register(LogicalTypeFactory factory) {
+LogicalTypes.java:  public static void register(String logicalTypeName, LogicalTypeFactory factory) {
+LogicalTypes.java:  public static Map<String, LogicalTypes.LogicalTypeFactory> getCustomRegisteredTypes() {
+LogicalTypes.java:  public static LogicalType fromSchema(Schema schema) {
+LogicalTypes.java:  public static LogicalType fromSchemaIgnoreInvalid(Schema schema) {
+LogicalTypes.java:  private static LogicalType fromSchemaImpl(Schema schema, boolean throwErrors) {
+LogicalTypes.java:  private static final String DECIMAL = "decimal";
+LogicalTypes.java:  private static final String BIG_DECIMAL = "big-decimal";
+LogicalTypes.java:  private static final String DURATION = "duration";
+LogicalTypes.java:  private static final String UUID = "uuid";
+LogicalTypes.java:  private static final String DATE = "date";
+LogicalTypes.java:  private static final String TIME_MILLIS = "time-millis";
+LogicalTypes.java:  private static final String TIME_MICROS = "time-micros";
+LogicalTypes.java:  private static final String TIMESTAMP_MILLIS = "timestamp-millis";
+LogicalTypes.java:  private static final String TIMESTAMP_MICROS = "timestamp-micros";
+LogicalTypes.java:  private static final String TIMESTAMP_NANOS = "timestamp-nanos";
+LogicalTypes.java:  private static final String LOCAL_TIMESTAMP_MILLIS = "local-timestamp-millis";
+LogicalTypes.java:  private static final String LOCAL_TIMESTAMP_MICROS = "local-timestamp-micros";
+LogicalTypes.java:  private static final String LOCAL_TIMESTAMP_NANOS = "local-timestamp-nanos";
+LogicalTypes.java:  public static Decimal decimal(int precision) {
+LogicalTypes.java:  public static Decimal decimal(int precision, int scale) {
+LogicalTypes.java:  private static final BigDecimal BIG_DECIMAL_TYPE = new BigDecimal();
+LogicalTypes.java:  public static BigDecimal bigDecimal() {
+LogicalTypes.java:  private static final LogicalType UUID_TYPE = new Uuid();
+LogicalTypes.java:  public static LogicalType uuid() {
+LogicalTypes.java:  private static final LogicalType DURATION_TYPE = new Duration();
+LogicalTypes.java:  public static LogicalType duration() {
+LogicalTypes.java:  private static final Date DATE_TYPE = new Date();
+LogicalTypes.java:  public static Date date() {
+LogicalTypes.java:  private static final TimeMillis TIME_MILLIS_TYPE = new TimeMillis();
+LogicalTypes.java:  public static TimeMillis timeMillis() {
+LogicalTypes.java:  private static final TimeMicros TIME_MICROS_TYPE = new TimeMicros();
+LogicalTypes.java:  public static TimeMicros timeMicros() {
+LogicalTypes.java:  private static final TimestampMillis TIMESTAMP_MILLIS_TYPE = new TimestampMillis();
+LogicalTypes.java:  public static TimestampMillis timestampMillis() {
+LogicalTypes.java:  private static final TimestampMicros TIMESTAMP_MICROS_TYPE = new TimestampMicros();
+LogicalTypes.java:  public static TimestampMicros timestampMicros() {
+LogicalTypes.java:  private static final TimestampNanos TIMESTAMP_NANOS_TYPE = new TimestampNanos();
+LogicalTypes.java:  public static TimestampNanos timestampNanos() {
+LogicalTypes.java:  private static final LocalTimestampMillis LOCAL_TIMESTAMP_MILLIS_TYPE = new LocalTimestampMillis();
+LogicalTypes.java:  public static LocalTimestampMillis localTimestampMillis() {
+LogicalTypes.java:  private static final LocalTimestampMicros LOCAL_TIMESTAMP_MICROS_TYPE = new LocalTimestampMicros();
+LogicalTypes.java:  public static LocalTimestampMicros localTimestampMicros() {
+LogicalTypes.java:  private static final LocalTimestampNanos LOCAL_TIMESTAMP_NANOS_TYPE = new LocalTimestampNanos();
+LogicalTypes.java:  public static LocalTimestampNanos localTimestampNanos() {
+LogicalTypes.java:  public static class Uuid extends LogicalType {
+LogicalTypes.java:    private static final int UUID_BYTES = 2 * Long.BYTES;
+LogicalTypes.java:  public static class Duration extends LogicalType {
+LogicalTypes.java:  public static class Decimal extends LogicalType {
+LogicalTypes.java:    private static final String PRECISION_PROP = "precision";
+LogicalTypes.java:    private static final String SCALE_PROP = "scale";
+LogicalTypes.java:  public static class BigDecimal extends LogicalType {
+LogicalTypes.java:  public static class Date extends LogicalType {
+LogicalTypes.java:  public static class TimeMillis extends LogicalType {
+LogicalTypes.java:  public static class TimeMicros extends LogicalType {
+LogicalTypes.java:  public static class TimestampMillis extends LogicalType {
+LogicalTypes.java:  public static class TimestampMicros extends LogicalType {
+LogicalTypes.java:  public static class TimestampNanos extends LogicalType {
+LogicalTypes.java:  public static class LocalTimestampMillis extends LogicalType {
+LogicalTypes.java:  public static class LocalTimestampMicros extends LogicalType {
+LogicalTypes.java:  public static class LocalTimestampNanos extends LogicalType {
+data/RecordBuilderBase.java:  protected static boolean isValidValue(Field f, Object value) {
+SchemaBuilder.java:  private static final ObjectMapper MAPPER = new ObjectMapper();
+SchemaBuilder.java:  public static TypeBuilder<Schema> builder() {
+SchemaBuilder.java:  public static TypeBuilder<Schema> builder(String namespace) {
+SchemaBuilder.java:  public static RecordBuilder<Schema> record(String name) {
+SchemaBuilder.java:  public static EnumBuilder<Schema> enumeration(String name) {
+SchemaBuilder.java:  public static FixedBuilder<Schema> fixed(String name) {
+SchemaBuilder.java:  public static ArrayBuilder<Schema> array() {
+SchemaBuilder.java:  public static MapBuilder<Schema> map() {
+SchemaBuilder.java:  public static BaseTypeBuilder<UnionAccumulator<Schema>> unionOf() {
+SchemaBuilder.java:  public static BaseTypeBuilder<Schema> nullable() {
+SchemaBuilder.java:  public static abstract class PropBuilder<S extends PropBuilder<S>> {
+SchemaBuilder.java:  public static abstract class NamedBuilder<S extends NamedBuilder<S>> extends PropBuilder<S> {
+SchemaBuilder.java:  public static abstract class NamespacedBuilder<R, S extends NamespacedBuilder<R, S>> extends NamedBuilder<S> {
+SchemaBuilder.java:  private static abstract class PrimitiveBuilder<R, P extends PrimitiveBuilder<R, P>> extends PropBuilder<P> {
+SchemaBuilder.java:  public static final class BooleanBuilder<R> extends PrimitiveBuilder<R, BooleanBuilder<R>> {
+SchemaBuilder.java:    private static <R> BooleanBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class IntBuilder<R> extends PrimitiveBuilder<R, IntBuilder<R>> {
+SchemaBuilder.java:    private static <R> IntBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class LongBuilder<R> extends PrimitiveBuilder<R, LongBuilder<R>> {
+SchemaBuilder.java:    private static <R> LongBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class FloatBuilder<R> extends PrimitiveBuilder<R, FloatBuilder<R>> {
+SchemaBuilder.java:    private static <R> FloatBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class DoubleBuilder<R> extends PrimitiveBuilder<R, DoubleBuilder<R>> {
+SchemaBuilder.java:    private static <R> DoubleBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class StringBldr<R> extends PrimitiveBuilder<R, StringBldr<R>> {
+SchemaBuilder.java:    private static <R> StringBldr<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class BytesBuilder<R> extends PrimitiveBuilder<R, BytesBuilder<R>> {
+SchemaBuilder.java:    private static <R> BytesBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class NullBuilder<R> extends PrimitiveBuilder<R, NullBuilder<R>> {
+SchemaBuilder.java:    private static <R> NullBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class FixedBuilder<R> extends NamespacedBuilder<R, FixedBuilder<R>> {
+SchemaBuilder.java:    private static <R> FixedBuilder<R> create(Completion<R> context, NameContext names, String name) {
+SchemaBuilder.java:  public static final class EnumBuilder<R> extends NamespacedBuilder<R, EnumBuilder<R>> {
+SchemaBuilder.java:    private static <R> EnumBuilder<R> create(Completion<R> context, NameContext names, String name) {
+SchemaBuilder.java:  public static final class MapBuilder<R> extends PropBuilder<MapBuilder<R>> {
+SchemaBuilder.java:    private static <R> MapBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static final class ArrayBuilder<R> extends PropBuilder<ArrayBuilder<R>> {
+SchemaBuilder.java:    private static <R> ArrayBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  private static class NameContext {
+SchemaBuilder.java:    private static final Set<String> PRIMITIVES = new HashSet<>();
+SchemaBuilder.java:    static {
+SchemaBuilder.java:  public static class BaseTypeBuilder<R> {
+SchemaBuilder.java:  public static final class TypeBuilder<R> extends BaseTypeBuilder<R> {
+SchemaBuilder.java:  private static final class UnionBuilder<R> extends BaseTypeBuilder<UnionAccumulator<R>> {
+SchemaBuilder.java:    private static <R> UnionBuilder<R> create(Completion<R> context, NameContext names) {
+SchemaBuilder.java:  public static class BaseFieldTypeBuilder<R> {
+SchemaBuilder.java:  public static final class FieldTypeBuilder<R> extends BaseFieldTypeBuilder<R> {
+SchemaBuilder.java:  public static final class UnionFieldTypeBuilder<R> {
+SchemaBuilder.java:  public final static class RecordBuilder<R> extends NamespacedBuilder<R, RecordBuilder<R>> {
+SchemaBuilder.java:    private static <R> RecordBuilder<R> create(Completion<R> context, NameContext names, String name) {
+SchemaBuilder.java:  public final static class FieldAssembler<R> {
+SchemaBuilder.java:  public final static class FieldBuilder<R> extends NamedBuilder<FieldBuilder<R>> {
+SchemaBuilder.java:  public static abstract class FieldDefault<R, S extends FieldDefault<R, S>> extends Completion<S> {
+SchemaBuilder.java:  public static class BooleanDefault<R> extends FieldDefault<R, BooleanDefault<R>> {
+SchemaBuilder.java:  public static class IntDefault<R> extends FieldDefault<R, IntDefault<R>> {
+SchemaBuilder.java:  public static class LongDefault<R> extends FieldDefault<R, LongDefault<R>> {
+SchemaBuilder.java:  public static class FloatDefault<R> extends FieldDefault<R, FloatDefault<R>> {
+SchemaBuilder.java:  public static class DoubleDefault<R> extends FieldDefault<R, DoubleDefault<R>> {
+SchemaBuilder.java:  public static class StringDefault<R> extends FieldDefault<R, StringDefault<R>> {
+SchemaBuilder.java:  public static class BytesDefault<R> extends FieldDefault<R, BytesDefault<R>> {
+SchemaBuilder.java:  public static class NullDefault<R> extends FieldDefault<R, NullDefault<R>> {
+SchemaBuilder.java:  public static class MapDefault<R> extends FieldDefault<R, MapDefault<R>> {
+SchemaBuilder.java:  public static class ArrayDefault<R> extends FieldDefault<R, ArrayDefault<R>> {
+SchemaBuilder.java:  public static class FixedDefault<R> extends FieldDefault<R, FixedDefault<R>> {
+SchemaBuilder.java:  public static class EnumDefault<R> extends FieldDefault<R, EnumDefault<R>> {
+SchemaBuilder.java:  public static class RecordDefault<R> extends FieldDefault<R, RecordDefault<R>> {
+SchemaBuilder.java:  public final static class GenericDefault<R> {
+SchemaBuilder.java:  private abstract static class Completion<R> {
+SchemaBuilder.java:  private static class SchemaCompletion extends Completion<Schema> {
+SchemaBuilder.java:  private static final Schema NULL_SCHEMA = Schema.create(Schema.Type.NULL);
+SchemaBuilder.java:  private static class NullableCompletion<R> extends Completion<R> {
+SchemaBuilder.java:  private static class OptionalCompletion<R> extends Completion<FieldAssembler<R>> {
+SchemaBuilder.java:  private abstract static class CompletionWrapper {
+SchemaBuilder.java:  private static final class NullableCompletionWrapper extends CompletionWrapper {
+SchemaBuilder.java:  private static abstract class NestedCompletion<R> extends Completion<R> {
+SchemaBuilder.java:  private static class MapCompletion<R> extends NestedCompletion<R> {
+SchemaBuilder.java:  private static class ArrayCompletion<R> extends NestedCompletion<R> {
+SchemaBuilder.java:  private static class UnionCompletion<R> extends Completion<UnionAccumulator<R>> {
+SchemaBuilder.java:  public static final class UnionAccumulator<R> {
+SchemaBuilder.java:  private static JsonNode toJsonNode(Object o) {
+LogicalType.java:  public static final String LOGICAL_TYPE_PROP = "logicalType";
+LogicalType.java:  private static final String[] INCOMPATIBLE_PROPS = new String[] { GenericData.STRING_PROP, SpecificData.CLASS_PROP,
+data/TimeConversions.java:  public static class DateConversion extends Conversion<LocalDate> {
+data/TimeConversions.java:  public static class TimeMillisConversion extends Conversion<LocalTime> {
+data/TimeConversions.java:  public static class TimeMicrosConversion extends Conversion<LocalTime> {
+data/TimeConversions.java:  public static class TimestampMillisConversion extends Conversion<Instant> {
+data/TimeConversions.java:  public static class TimestampMicrosConversion extends Conversion<Instant> {
+data/TimeConversions.java:  public static class TimestampNanosConversion extends Conversion<Instant> {
+data/TimeConversions.java:  public static class LocalTimestampMillisConversion extends Conversion<LocalDateTime> {
+data/TimeConversions.java:  public static class LocalTimestampMicrosConversion extends Conversion<LocalDateTime> {
+data/TimeConversions.java:  public static class LocalTimestampNanosConversion extends Conversion<LocalDateTime> {
+JsonProperties.java:  static {
+JsonProperties.java:  public static class Null {
+JsonProperties.java:  public static final Null NULL_VALUE = new Null();
+JsonProperties.java:    private static final long serialVersionUID = 1L;
+JsonSchemaParser.java:  public static Schema parseInternal(String... fragments) {
+SchemaValidationException.java:  private static String getMessage(Schema reader, Schema writer) {
+generic/GenericDatumReader.java:  private static final ThreadLocal<Map<Schema, Map<Schema, ResolvingDecoder>>> RESOLVER_CACHE = ThreadLocalWithInitial
+generic/GenericDatumReader.java:  private static final class IdentitySchemaKey {
+generic/GenericDatumReader.java:  static class ReaderCache {
+generic/GenericDatumReader.java:  public static void skip(Schema schema, Decoder in) throws IOException {
+SystemLimitException.java:  static final int MAX_ARRAY_VM_LIMIT = Integer.MAX_VALUE - 8;
+SystemLimitException.java:  public static final String MAX_BYTES_LENGTH_PROPERTY = "org.apache.avro.limits.bytes.maxLength";
+SystemLimitException.java:  public static final String MAX_COLLECTION_LENGTH_PROPERTY = "org.apache.avro.limits.collectionItems.maxLength";
+SystemLimitException.java:  public static final String MAX_STRING_LENGTH_PROPERTY = "org.apache.avro.limits.string.maxLength";
+SystemLimitException.java:  private static int maxBytesLength = MAX_ARRAY_VM_LIMIT;
+SystemLimitException.java:  private static int maxCollectionLength = MAX_ARRAY_VM_LIMIT;
+SystemLimitException.java:  private static int maxStringLength = MAX_ARRAY_VM_LIMIT;
+SystemLimitException.java:  static {
+SystemLimitException.java:  private static int getLimitFromProperty(String property, int defaultValue) {
+SystemLimitException.java:  public static int checkMaxBytesLength(long length) {
+SystemLimitException.java:  public static int checkMaxCollectionLength(long existing, long items) {
+SystemLimitException.java:  public static int checkMaxCollectionLength(long items) {
+SystemLimitException.java:  public static int checkMaxStringLength(long length) {
+SystemLimitException.java:  static void resetLimits() {

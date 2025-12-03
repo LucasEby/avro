@@ -44,8 +44,8 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -121,7 +121,7 @@ public class SpecificData extends GenericData {
    * https://docs.oracle.com/javase/specs/jls/se16/html/jls-3.html require
    * mangling in order to be used in generated Java code.
    */
-  public static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
+  public static final Set<String> RESERVED_WORDS = new LinkedHashSet<>(Arrays.asList(
       // Keywords from Section 3.9 can't be used as identifiers.
       "_", "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue",
       "default", "do", "double", "else", "enum", "extends", "final", "finally", "float", "for", "goto", "if",
@@ -135,7 +135,7 @@ public class SpecificData extends GenericData {
       "Builder"));
 
   /* Reserved words for accessor/mutator methods */
-  public static final Set<String> ACCESSOR_MUTATOR_RESERVED_WORDS = new HashSet<>(
+  public static final Set<String> ACCESSOR_MUTATOR_RESERVED_WORDS = new LinkedHashSet<>(
       Arrays.asList("class", "schema", "classSchema"));
 
   static {
@@ -144,7 +144,7 @@ public class SpecificData extends GenericData {
   }
 
   /* Reserved words for type identifiers */
-  public static final Set<String> TYPE_IDENTIFIER_RESERVED_WORDS = new HashSet<>(
+  public static final Set<String> TYPE_IDENTIFIER_RESERVED_WORDS = new LinkedHashSet<>(
       Arrays.asList("var", "yield", "record"));
 
   static {
@@ -153,7 +153,7 @@ public class SpecificData extends GenericData {
   }
 
   /* Reserved words for error types */
-  public static final Set<String> ERROR_RESERVED_WORDS = new HashSet<>(Arrays.asList("message", "cause"));
+  public static final Set<String> ERROR_RESERVED_WORDS = new LinkedHashSet<>(Arrays.asList("message", "cause"));
 
   static {
     // Add accessor/mutator reserved words to error reserved words
@@ -168,7 +168,7 @@ public class SpecificData extends GenericData {
    * e.g., those without a no-arg constructor or those whose fields are all
    * transient.
    */
-  protected Set<Class> stringableClasses = new HashSet<>(Arrays.asList(java.math.BigDecimal.class,
+  protected Set<Class> stringableClasses = new LinkedHashSet<>(Arrays.asList(java.math.BigDecimal.class,
       java.math.BigInteger.class, java.net.URI.class, java.net.URL.class, java.io.File.class));
 
   /** For subclasses. Applications normally use {@link SpecificData#get()}. */
@@ -469,7 +469,8 @@ public class SpecificData extends GenericData {
 
   // cache for schemas created from Class objects. Use ClassValue to avoid
   // locking classloaders and is GC and thread safe.
-  private final ClassValueCache<Schema> schemaClassCache = new ClassValueCache<>(c -> createSchema(c, new HashMap<>()));
+  private final ClassValueCache<Schema> schemaClassCache = new ClassValueCache<>(
+      c -> createSchema(c, new LinkedHashMap<>()));
   // for non-class objects, use a WeakHashMap, but this needs a sync block around
   // it
   private final Map<java.lang.reflect.Type, Schema> schemaTypeCache = Collections.synchronizedMap(new WeakHashMap<>());
@@ -480,7 +481,7 @@ public class SpecificData extends GenericData {
       if (type instanceof Class) {
         return schemaClassCache.apply((Class<?>) type);
       }
-      return schemaTypeCache.computeIfAbsent(type, t -> createSchema(t, new HashMap<>()));
+      return schemaTypeCache.computeIfAbsent(type, t -> createSchema(t, new LinkedHashMap<>()));
     } catch (Exception e) {
       throw (e instanceof AvroRuntimeException) ? (AvroRuntimeException) e : new AvroRuntimeException(e);
     }

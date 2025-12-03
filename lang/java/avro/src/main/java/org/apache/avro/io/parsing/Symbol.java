@@ -18,9 +18,9 @@
 package org.apache.avro.io.parsing;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -297,7 +297,7 @@ public abstract class Symbol {
 
     private static Symbol[] makeProduction(Symbol[] symbols) {
       Symbol[] result = new Symbol[flattenedSize(symbols, 0) + 1];
-      flatten(symbols, 0, result, 1, new HashMap<>(), new HashMap<>());
+      flatten(symbols, 0, result, 1, new LinkedHashMap<>(), new LinkedHashMap<>());
       return result;
     }
   }
@@ -394,7 +394,7 @@ public abstract class Symbol {
    * fail for some inputs.
    */
   public static boolean hasErrors(Symbol symbol) {
-    return hasErrors(symbol, new HashSet<>());
+    return hasErrors(symbol, new LinkedHashSet<>());
   }
 
   private static boolean hasErrors(Symbol symbol, Set<Symbol> visited) {

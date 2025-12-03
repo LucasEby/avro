@@ -26,8 +26,8 @@ import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -605,7 +605,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         int countAfterRestructure = this.count.get();
         Set<Reference<K, V>> toPurge = Collections.emptySet();
         if (ref != null) {
-          toPurge = new HashSet<>();
+          toPurge = new LinkedHashSet<>();
           while (ref != null) {
             toPurge.add(ref);
             ref = this.referenceManager.pollForPurge();

@@ -1583,14 +1583,15 @@ public class GenericData {
 
   /**
    * Called to create new array instances. Subclasses may override to use a
-   * different map implementation. By default, this returns a {@link HashMap}.
+   * different map implementation. By default, this returns a
+   * {@link LinkedHashMap}.
    */
   public Object newMap(Object old, int size) {
     if (old instanceof Map) {
       ((Map<?, ?>) old).clear();
       return old;
     } else
-      return new HashMap<>(size);
+      return new LinkedHashMap<>(size);
   }
 
   /**

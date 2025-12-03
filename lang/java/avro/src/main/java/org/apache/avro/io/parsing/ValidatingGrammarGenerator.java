@@ -17,7 +17,7 @@
  */
 package org.apache.avro.io.parsing;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +33,7 @@ public class ValidatingGrammarGenerator {
    * given schema <tt>sc</tt>.
    */
   public Symbol generate(Schema schema) {
-    return Symbol.root(generate(schema, new HashMap<>()));
+    return Symbol.root(generate(schema, new LinkedHashMap<>()));
   }
 
   /**

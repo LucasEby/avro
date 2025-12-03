@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -172,10 +170,10 @@ public abstract class Schema extends JsonProperties implements Serializable {
     }
   }
 
-  private static final Set<String> SCHEMA_RESERVED = new HashSet<>(
+  private static final Set<String> SCHEMA_RESERVED = new LinkedHashSet<>(
       Arrays.asList("doc", "fields", "items", "name", "namespace", "size", "symbols", "values", "type", "aliases"));
 
-  private static final Set<String> ENUM_RESERVED = new HashSet<>(SCHEMA_RESERVED);
+  private static final Set<String> ENUM_RESERVED = new LinkedHashSet<>(SCHEMA_RESERVED);
   static {
     ENUM_RESERVED.add("default");
   }
@@ -418,7 +416,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
    */
   @Deprecated
   public String toString(boolean pretty) {
-    return toString(new HashSet<String>(), pretty);
+    return toString(new LinkedHashSet<String>(), pretty);
   }
 
   /**
@@ -431,7 +429,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
   // Use at your own risk. This method should be removed with AVRO-2832.
   @Deprecated
   public String toString(Collection<Schema> referencedSchemas, boolean pretty) {
-    Set<String> knownNames = new HashSet<>();
+    Set<String> knownNames = new LinkedHashSet<>();
     if (referencedSchemas != null) {
       for (Schema s : referencedSchemas) {
         knownNames.add(s.getFullName());
@@ -501,7 +499,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
   }
 
   private static final Set<String> FIELD_RESERVED = Collections
-      .unmodifiableSet(new HashSet<>(Arrays.asList("default", "doc", "name", "order", "type", "aliases")));
+      .unmodifiableSet(new LinkedHashSet<>(Arrays.asList("default", "doc", "name", "order", "type", "aliases")));
 
   /** Returns true if this record is a union type. */
   public boolean isUnion() {
@@ -919,7 +917,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
     }
   }
 
-  private static final ThreadLocal<Set<SeenPair>> SEEN_EQUALS = ThreadLocalWithInitial.of(HashSet::new);
+  private static final ThreadLocal<Set<SeenPair>> SEEN_EQUALS = ThreadLocalWithInitial.of(LinkedHashSet::new);
   private static final ThreadLocal<Map<Schema, Schema>> SEEN_HASHCODE = ThreadLocalWithInitial.of(IdentityHashMap::new);
 
   private static class RecordSchema extends NamedSchema {
@@ -968,7 +966,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
         throw new AvroRuntimeException("Fields are already set");
       }
       int i = 0;
-      fieldMap = new HashMap<>(Math.multiplyExact(2, fields.size()));
+      fieldMap = new LinkedHashMap<>(Math.multiplyExact(2, fields.size()));
       LockableArrayList<Field> ff = new LockableArrayList<>(fields.size());
       for (Field f : fields) {
         if (f.position != -1) {
@@ -1089,7 +1087,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
     public EnumSchema(Name name, String doc, LockableArrayList<String> symbols, String enumDefault) {
       super(Type.ENUM, name, doc);
       this.symbols = symbols.lock();
-      this.ordinals = new HashMap<>(Math.multiplyExact(2, symbols.size()));
+      this.ordinals = new LinkedHashMap<>(Math.multiplyExact(2, symbols.size()));
       this.enumDefault = enumDefault;
       int i = 0;
       for (String symbol : symbols) {
@@ -1251,7 +1249,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
 
     public UnionSchema(LockableArrayList<Schema> types) {
       super(Type.UNION);
-      this.indexByName = new HashMap<>(Math.multiplyExact(2, types.size()));
+      this.indexByName = new LinkedHashMap<>(Math.multiplyExact(2, types.size()));
       this.types = types.lock();
       int index = 0;
       for (Schema type : types) {
@@ -1619,7 +1617,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
     return new Parser(validator).parse(jsonSchema);
   }
 
-  static final Map<String, Type> PRIMITIVES = new HashMap<>();
+  static final Map<String, Type> PRIMITIVES = new LinkedHashMap<>();
   static {
     PRIMITIVES.put("string", Type.STRING);
     PRIMITIVES.put("bytes", Type.BYTES);
@@ -2069,8 +2067,8 @@ public abstract class Schema extends JsonProperties implements Serializable {
 
     // create indexes of names
     Map<Schema, Schema> seen = new IdentityHashMap<>(1);
-    Map<Name, Name> aliases = new HashMap<>(1);
-    Map<Name, Map<String, String>> fieldAliases = new HashMap<>(1);
+    Map<Name, Name> aliases = new LinkedHashMap<>(1);
+    Map<Name, Map<String, String>> fieldAliases = new LinkedHashMap<>(1);
     getAliases(reader, seen, aliases, fieldAliases);
 
     if (aliases.isEmpty() && fieldAliases.isEmpty())
@@ -2154,7 +2152,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
       for (Field field : schema.getFields()) {
         if (field.aliases != null)
           for (String fieldAlias : field.aliases) {
-            Map<String, String> recordAliases = fieldAliases.computeIfAbsent(record.name, k -> new HashMap<>());
+            Map<String, String> recordAliases = fieldAliases.computeIfAbsent(record.name, k -> new LinkedHashMap<>());
             recordAliases.put(fieldAlias, field.name);
           }
         getAliases(field.schema, seen, aliases, fieldAliases);

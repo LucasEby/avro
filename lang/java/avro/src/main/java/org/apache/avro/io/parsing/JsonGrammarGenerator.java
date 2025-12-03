@@ -17,7 +17,7 @@
  */
 package org.apache.avro.io.parsing;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.avro.Schema;
@@ -35,7 +35,7 @@ public class JsonGrammarGenerator extends ValidatingGrammarGenerator {
    */
   @Override
   public Symbol generate(Schema schema) {
-    return Symbol.root(generate(schema, new HashMap<>()));
+    return Symbol.root(generate(schema, new LinkedHashMap<>()));
   }
 
   /**

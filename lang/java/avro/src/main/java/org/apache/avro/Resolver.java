@@ -17,7 +17,7 @@
  */
 package org.apache.avro;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +59,7 @@ public class Resolver {
    * @return Nested actions for resolving the two
    */
   public static Action resolve(Schema writer, Schema reader, GenericData data) {
-    return resolve(Schema.applyAliases(writer, reader), reader, data, new HashMap<>());
+    return resolve(Schema.applyAliases(writer, reader), reader, data, new LinkedHashMap<>());
   }
 
   /**
@@ -571,7 +571,7 @@ public class Resolver {
     }
 
     public static Action resolve(Schema writeSchema, Schema readSchema, GenericData data, Map<SeenPair, Action> seen) {
-      boolean unionEquivalent = unionEquiv(writeSchema, readSchema, new HashMap<>());
+      boolean unionEquivalent = unionEquiv(writeSchema, readSchema, new LinkedHashMap<>());
       final List<Schema> writeTypes = writeSchema.getTypes();
       final List<Schema> readTypes = (unionEquivalent ? readSchema.getTypes() : null);
       int writeTypeLength = writeTypes.size();
