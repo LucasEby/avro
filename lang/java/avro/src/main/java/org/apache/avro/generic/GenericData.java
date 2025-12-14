@@ -26,7 +26,6 @@ import java.time.temporal.Temporal;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -138,7 +137,7 @@ public class GenericData {
     }
   }
 
-  private final Map<String, Conversion<?>> conversions = new HashMap<>();
+  private final Map<String, Conversion<?>> conversions = new LinkedHashMap<>();
 
   private final Map<Class<?>, Map<String, Conversion<?>>> conversionsByClass = new IdentityHashMap<>();
 
@@ -1421,7 +1420,7 @@ public class GenericData {
       return value; // immutable
     case MAP:
       Map<Object, Object> mapValue = (Map) value;
-      Map<Object, Object> mapCopy = new HashMap<>(mapValue.size());
+      Map<Object, Object> mapCopy = new LinkedHashMap<>(mapValue.size());
       for (Map.Entry<Object, Object> entry : mapValue.entrySet()) {
         mapCopy.put(deepCopy(STRINGS, entry.getKey()), deepCopy(schema.getValueType(), entry.getValue()));
       }
